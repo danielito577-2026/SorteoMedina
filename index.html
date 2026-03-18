@@ -1,41 +1,96 @@
-<style>
-    .grilla {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr); /* 5 columnas */
-        gap: 10px;
-        margin-top: 20px;
-    }
-    .numero {
-        padding: 15px;
-        background: #e0e0e0;
-        border-radius: 5px;
-        cursor: pointer;
-        font-weight: bold;
-    }
-    .numero.seleccionado {
-        background: #ff80ab;
-        color: white;
-    }
-    .numero.reservado {
-        background: #757575;
-        cursor: not-allowed;
-        text-decoration: line-through;
-    }
-</style>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rifa de Pascuas Automática</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; text-align: center; background-color: #fce4ec; padding: 20px; }
+        .container { background: white; padding: 20px; border-radius: 15px; max-width: 600px; margin: auto; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h1 { color: #d81b60; }
+        .grilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); gap: 8px; margin-top: 20px; }
+        .nro { padding: 10px; background: #e8f5e9; border: 1px solid #c8e6c9; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 14px; }
+        .nro.reservado { background: #ffcdd2; color: #c62828; cursor: not-allowed; text-decoration: line-through; }
+        .nro.seleccionado { background: #d81b60; color: white; }
+        #form-reserva { display: none; margin-top: 20px; padding: 15px; border-top: 2px solid #fce4ec; }
+        input { padding: 10px; width: 80%; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc; }
+        button { background: #d81b60; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
 
-<div class="grilla" id="rifa">
+<div class="container">
+    <h1>🐰 Rifa de Pascuas 🐣</h1>
+    <p>Elegí tu número de la suerte:</p>
+    
+    <div id="grilla" class="grilla">Cargando números...</div>
+
+    <div id="form-reserva">
+        <h3>Reservar número <span id="nro-elegido"></span></h3>
+        <input type="text" id="nombre-cliente" placeholder="Tu nombre completo">
+        <br>
+        <button onclick="enviarReserva()">Confirmar Reserva</button>
     </div>
+</div>
 
 <script>
-    const contenedor = document.getElementById('rifa');
-    for (let i = 1; i <= 100; i++) {
-        let div = document.createElement('div');
-        div.className = 'numero';
-        div.innerText = i.toString().padStart(2, '0');
-        div.onclick = function() {
-            this.classList.toggle('seleccionado');
-            alert("Has seleccionado el número " + i + ". ¡Contactame para reservarlo!");
-        };
-        contenedor.appendChild(div);
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyGzqNdxeuRlg8qL6gcWhkk5IlMEzbmcstgRaQeg3-9J0MkVtihGo_KhUOvwOjVSzkQ/exec';
+    let numeroSeleccionado = null;
+
+    // 1. Cargar números desde Google Sheets
+    async function cargarNumeros() {
+        const res = await fetch(scriptURL);
+        const data = await res.json();
+        const grilla = document.getElementById('grilla');
+        grilla.innerHTML = '';
+
+        // Empezamos desde i=1 porque i=0 son los encabezados del Excel
+        for (let i = 1; i < data.length; i++) {
+            const nro = data[i][0];
+            const estado = data[i][2];
+            const div = document.createElement('div');
+            div.className = 'nro' + (estado === 'Reservado' ? ' reservado' : '');
+            div.innerText = nro;
+            
+            if (estado !== 'Reservado') {
+                div.onclick = () => seleccionar(nro, div);
+            }
+            grilla.appendChild(div);
+        }
     }
+
+    function seleccionar(nro, elemento) {
+        document.querySelectorAll('.nro').forEach(el => el.classList.remove('seleccionado'));
+        elemento.classList.add('seleccionado');
+        numeroSeleccionado = nro;
+        document.getElementById('nro-elegido').innerText = nro;
+        document.getElementById('form-reserva').style.display = 'block';
+    }
+
+    // 2. Enviar reserva a Google Sheets
+    async function enviarReserva() {
+        const nombre = document.getElementById('nombre-cliente').value;
+        if (!nombre) return alert("Poné tu nombre");
+
+        const btn = document.querySelector('button');
+        btn.innerText = "Procesando...";
+        btn.disabled = true;
+
+        try {
+            await fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors', // Importante para Google Scripts
+                body: JSON.stringify({ numero: numeroSeleccionado, nombre: nombre })
+            });
+            alert("¡Reserva enviada! El número se actualizará en breve.");
+            location.reload();
+        } catch (e) {
+            alert("Error al reservar.");
+            btn.disabled = false;
+        }
+    }
+
+    cargarNumeros();
 </script>
+</body>
+</html>

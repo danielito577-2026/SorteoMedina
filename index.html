@@ -51,4 +51,113 @@
         
         <div class="pago-info">
             <b>🎟 Valor del número: $5000</b><br>
-            <b>Alias:</b> <span style="color:#d
+            <b>Alias:</b> <span style="color:#d81b60; font-weight:bold;">mieltresreinas.nx</span><br>
+            <b>Enviar comprobante al:</b> 2995304691
+        </div>
+    </div>
+
+    <p><b>👇 Tocá un número para elegirlo:</b></p>
+    <div id="grilla" class="grilla">Cargando sorteo...</div>
+
+    <div id="form-reserva">
+        <h3>📍 Reservando el N° <span id="nro-elegido" style="color:#d81b60"></span></h3>
+        <input type="text" id="nombre-cliente" placeholder="Tu Nombre Completo">
+        <input type="tel" id="tel-cliente" placeholder="Tu WhatsApp (ej: 2995304691)">
+        <button id="btn-confirmar" onclick="enviarReserva()">✅ RESERVAR Y ENVIAR COMPROBANTE</button>
+        <p style="font-size: 11px; color: #666; margin-top: 10px;">Al confirmar, se guardará tu reserva y se abrirá WhatsApp.</p>
+    </div>
+
+    <div class="footer">
+        <p>¡Gracias por su compra!<br>
+        Les deseamos mucha suerte 🍀🐰</p>
+        
+        <div class="fecha-sorteo">📅 Sorteo: 31/03/2026 - 11:00 AM</div>
+        
+        <p>Todo lo recaudado será destinado para nuestro viaje de egresados.🎓<br>
+        <b>¡Gracias por ayudarnos a cumplir este sueño! ✨</b></p>
+    </div>
+</div>
+
+<script>
+    // ESTA ES TU NUEVA URL DE GOOGLE SCRIPT
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxp31A5qhqfKD4B7mtUc6Buo9thq30k6SESxbi4pRMrKTKU0QwOMTgS2vTX8xrlCnjY/exec';
+    const miWhatsApp = "5492995304691"; 
+    let numeroSeleccionado = null;
+
+    async function cargarNumeros() {
+        try {
+            const res = await fetch(scriptURL);
+            const data = await res.json();
+            const grilla = document.getElementById('grilla');
+            grilla.innerHTML = '';
+
+            for (let i = 1; i < data.length; i++) {
+                const nro = data[i][0];
+                const estado = data[i][2]; // Columna C del Excel
+                const div = document.createElement('div');
+                div.className = 'nro' + (estado === 'Reservado' ? ' reservado' : '');
+                div.innerText = nro;
+                
+                if (estado !== 'Reservado') {
+                    div.onclick = () => abrirMenu(nro, div);
+                }
+                grilla.appendChild(div);
+            }
+        } catch (e) {
+            console.error("Error al cargar datos", e);
+            document.getElementById('grilla').innerText = "Error al conectar con la base de datos.";
+        }
+    }
+
+    function abrirMenu(nro, elemento) {
+        document.querySelectorAll('.nro').forEach(el => el.classList.remove('seleccionado'));
+        elemento.classList.add('seleccionado');
+        numeroSeleccionado = nro;
+        document.getElementById('nro-elegido').innerText = nro;
+        document.getElementById('form-reserva').style.display = 'block';
+        document.getElementById('form-reserva').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    async function enviarReserva() {
+        const nombre = document.getElementById('nombre-cliente').value;
+        const telefono = document.getElementById('tel-cliente').value;
+        
+        if (!nombre || !telefono) return alert("Por favor, completá nombre y teléfono.");
+
+        const btn = document.getElementById('btn-confirmar');
+        btn.innerText = "⏳ GUARDANDO EN BASE DE DATOS...";
+        btn.disabled = true;
+
+        const mensaje = encodeURIComponent(`¡Hola! Soy ${nombre}, acabo de reservar el número ${numeroSeleccionado} para la Rifa. 🐣 Adjunto el comprobante. ✨`);
+        const urlWhatsApp = `https://wa.me/${miWhatsApp}?text=${mensaje}`;
+
+        try {
+            // Envío de datos al Excel incluyendo el teléfono
+            await fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: JSON.stringify({ 
+                    numero: numeroSeleccionado, 
+                    nombre: nombre,
+                    telefono: telefono 
+                })
+            });
+
+            // Abrir WhatsApp
+            window.open(urlWhatsApp, '_blank');
+            
+            alert("¡Número reservado y guardado con éxito! Enviá el comprobante ahora.");
+            location.reload();
+
+        } catch (e) {
+            alert("Hubo un error al guardar. Reintentá.");
+            btn.innerText = "✅ RESERVAR Y ENVIAR COMPROBANTE";
+            btn.disabled = false;
+        }
+    }
+
+    cargarNumeros();
+</script>
+
+</body>
+</html>

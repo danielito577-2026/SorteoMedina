@@ -1,43 +1,41 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sorteo de Pascuas 2026</title>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <style>
-        body { font-family: 'Arial', sans-serif; text-align: center; background-color: #fce4ec; color: #ad1457; padding: 50px; }
-        .container { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); max-width: 500px; margin: auto; }
-        h1 { color: #ff80ab; }
-        button { background-color: #ff80ab; color: white; border: none; padding: 15px 30px; font-size: 18px; border-radius: 50px; cursor: pointer; transition: 0.3s; }
-        button:hover { background-color: #f06292; transform: scale(1.05); }
-        #resultado { margin-top: 20px; font-size: 24px; font-weight: bold; min-height: 40px; }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>🐰 Sorteo de Pascuas 🐣</h1>
-        <p>Haz clic para conocer al ganador:</p>
-        <button onclick="realizarSorteo()">¡Sortear Ganador!</button>
-        <div id="resultado"></div>
+<style>
+    .grilla {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr); /* 5 columnas */
+        gap: 10px;
+        margin-top: 20px;
+    }
+    .numero {
+        padding: 15px;
+        background: #e0e0e0;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    .numero.seleccionado {
+        background: #ff80ab;
+        color: white;
+    }
+    .numero.reservado {
+        background: #757575;
+        cursor: not-allowed;
+        text-decoration: line-through;
+    }
+</style>
+
+<div class="grilla" id="rifa">
     </div>
 
-    <script>
-        // AQUÍ AGREGAS LOS NOMBRES DE TUS PARTICIPANTES
-        const participantes = ["Anaguerrero", "Pedroelescamoso", "Lucíagalan", "JuanFuentes", "MartaSosa", "RobertoGalan"];
-
-        function realizarSorteo() {
-            const resDiv = document.getElementById('resultado');
-            resDiv.innerHTML = "Girando los huevos de pascua... 🥚";
-            
-            setTimeout(() => {
-                const ganador = participantes[Math.floor(Math.random() * participantes.length)];
-                resDiv.innerHTML = "🎉 ¡Ganador/a: " + ganador + "! 🏆";
-                
-                // Efecto de papelitos (confetti)
-                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-            }, 1500);
-        }
-    </script>
-</body>
-</html>
+<script>
+    const contenedor = document.getElementById('rifa');
+    for (let i = 1; i <= 100; i++) {
+        let div = document.createElement('div');
+        div.className = 'numero';
+        div.innerText = i.toString().padStart(2, '0');
+        div.onclick = function() {
+            this.classList.toggle('seleccionado');
+            alert("Has seleccionado el número " + i + ". ¡Contactame para reservarlo!");
+        };
+        contenedor.appendChild(div);
+    }
+</script>

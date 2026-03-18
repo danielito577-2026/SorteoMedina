@@ -7,28 +7,19 @@
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; background-color: #fff5f8; color: #444; padding: 15px; }
         .container { background: white; padding: 25px; border-radius: 20px; max-width: 500px; margin: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        
         h1 { color: #d81b60; font-size: 26px; margin-bottom: 5px; }
         .subtitulo { color: #ad1457; font-weight: bold; margin-bottom: 20px; display: block; }
-
-        /* Recuadro de Premios e Info */
         .info-box { background: #fce4ec; border: 2px solid #f8bbd0; border-radius: 15px; padding: 15px; margin-bottom: 20px; text-align: left; }
         .info-box h2 { color: #d81b60; font-size: 20px; margin-top: 0; text-align: center; border-bottom: 1px solid #f8bbd0; padding-bottom: 5px; }
-        .premio-item { margin: 10px 0; font-size: 15px; line-height: 1.4; }
         .pago-info { background: #fff; border-radius: 10px; padding: 10px; margin-top: 10px; border: 1px solid #f8bbd0; }
-
         .grilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(45px, 1fr)); gap: 10px; margin: 20px 0; }
         .nro { padding: 12px 5px; background: #fce4ec; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.2s; border: 1px solid #f8bbd0; }
-        .nro:hover { background: #f8bbd0; transform: scale(1.1); }
         .nro.reservado { background: #e0e0e0; color: #9e9e9e; cursor: not-allowed; text-decoration: line-through; border: none; }
         .nro.seleccionado { background: #d81b60; color: white; border-color: #ad1457; }
-        
         #form-reserva { display: none; margin-top: 25px; padding: 20px; background: #fff0f6; border-radius: 15px; border: 2px dashed #ff80ab; animation: fadeIn 0.5s; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
         input { padding: 12px; width: 90%; margin-bottom: 12px; border-radius: 8px; border: 1px solid #ff80ab; outline: none; }
-        button { background: #d81b60; color: white; border: none; padding: 15px 30px; border-radius: 10px; cursor: pointer; font-weight: bold; width: 100%; font-size: 16px; }
-        
+        button { background: #25d366; color: white; border: none; padding: 15px 30px; border-radius: 10px; cursor: pointer; font-weight: bold; width: 100%; font-size: 16px; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3); }
         .footer { margin-top: 30px; padding: 20px; border-top: 1px solid #eee; font-size: 14px; line-height: 1.6; }
         .fecha-sorteo { background: #d81b60; color: white; padding: 5px 10px; border-radius: 5px; display: inline-block; margin: 10px 0; }
     </style>
@@ -41,40 +32,38 @@
 
     <div class="info-box">
         <h2>🎁 Premios</h2>
-        <div class="premio-item">🥇 <b>1er Premio:</b> Huevo grande + 2 docena de sorrentinos</div>
-        <div class="premio-item">🥈 <b>2do Premio:</b> 2 Huevo mediano + 2 docena de sorrentinos</div>
-        <div class="premio-item">🥉 <b>3er Premio:</b> 1 Huevo pequeño + 2 docena de sorrentinos</div>
+        <div style="margin: 10px 0;">🥇 <b>1er:</b> Huevo grande + 2 docena de sorrentinos</div>
+        <div style="margin: 10px 0;">🥈 <b>2do:</b> 2 Huevo mediano + 2 docena de sorrentinos</div>
+        <div style="margin: 10px 0;">🥉 <b>3er:</b> 1 Huevo pequeño + 2 docena de sorrentinos</div>
         
         <div class="pago-info">
             <b>🎟 Valor del número: $5000</b><br>
             <b>Alias:</b> <span style="color:#d81b60">mieltresreinas.nx</span><br>
-            <b>Enviar comprobante al:</b> 2995304691
+            <b>CBU a nombre de:</b> [Tu Nombre/Titular]
         </div>
     </div>
 
-    <p><b>👇 Tocá un número para elegirlo:</b></p>
+    <p><b>👇 Elegí tu número:</b></p>
     <div id="grilla" class="grilla">Cargando sorteo...</div>
 
     <div id="form-reserva">
         <h3>📍 Reservando el N° <span id="nro-elegido" style="color:#d81b60"></span></h3>
         <input type="text" id="nombre-cliente" placeholder="Tu Nombre Completo">
-        <input type="tel" id="tel-cliente" placeholder="Tu WhatsApp (ej: 2991234567)">
-        <button id="btn-confirmar" onclick="enviarReserva()">¡CONFIRMAR MI NÚMERO!</button>
+        <input type="tel" id="tel-cliente" placeholder="Tu WhatsApp (con código de área)">
+        <button id="btn-confirmar" onclick="enviarReserva()">✅ RESERVAR Y ENVIAR COMPROBANTE</button>
+        <p style="font-size: 12px; color: #666; margin-top: 10px;">Al confirmar, se abrirá tu WhatsApp para enviar el comprobante.</p>
     </div>
 
     <div class="footer">
-        <p>¡Gracias por su compra!<br>
-        Les deseamos mucha suerte 🍀🐰</p>
-        
+        <p>¡Gracias por su compra! 🍀🐰</p>
         <div class="fecha-sorteo">📅 Sorteo: 31/03/2026 - 11:00 AM</div>
-        
-        <p>Todo lo recaudado será destinado para nuestro viaje de egresados.🎓<br>
-        <b>¡Gracias por ayudarnos a cumplir este sueño! ✨</b></p>
+        <p>Todo lo recaudado será destinado para nuestro viaje de egresados.🎓</p>
     </div>
 </div>
 
 <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyGzqNdxeuRlg8qL6gcWhkk5IlMEzbmcstgRaQeg3-9J0MkVtihGo_KhUOvwOjVSzkQ/exec';
+    const miWhatsApp = "5492995304691"; // Tu número sin el +
     let numeroSeleccionado = null;
 
     async function cargarNumeros() {
@@ -83,7 +72,6 @@
             const data = await res.json();
             const grilla = document.getElementById('grilla');
             grilla.innerHTML = '';
-
             for (let i = 1; i < data.length; i++) {
                 const nro = data[i][0];
                 const estado = data[i][2];
@@ -114,13 +102,20 @@
         btn.innerText = "⏳ Guardando...";
         btn.disabled = true;
 
+        // Mensaje de WhatsApp
+        const mensaje = encodeURIComponent(`¡Hola! Soy ${nombre}, acabo de reservar el número ${numeroSeleccionado} para la Rifa de Pascuas. 🐣 Adjunto el comprobante del pago. ✨`);
+        const urlWa = `https://wa.me/${miWhatsApp}?text=${mensaje}`;
+
         try {
             await fetch(scriptURL, {
                 method: 'POST',
                 mode: 'no-cors',
                 body: JSON.stringify({ numero: numeroSeleccionado, nombre: nombre, telefono: telefono })
             });
-            alert("¡Número " + numeroSeleccionado + " reservado! No olvides enviar el comprobante por WhatsApp.");
+            
+            // Abrir WhatsApp y recargar
+            window.open(urlWa, '_blank');
+            alert("¡Reserva registrada! Ahora se abrirá WhatsApp para que envíes el comprobante.");
             location.reload();
         } catch (e) {
             alert("Error al guardar.");

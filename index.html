@@ -3,230 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rifa de Pascuas - Dark Mode</title>
+    <title>Gran Rifa Criolla - Egresados</title>
     <style>
-        /* ESTILO 1: MODERNO Y OSCURO */
+        /* ESTILO 2: RÚSTICO Y TRADICIONAL */
         body { 
-            font-family: 'Inter', -apple-system, sans-serif; 
-            background-color: #121212; 
-            color: #e0e0e0; 
+            font-family: 'Georgia', serif; 
+            background-color: #f4ece4; 
+            color: #5d4037; 
             padding: 15px; 
             margin: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/sepia-paper.png');
         }
         .container { 
-            background: #1e1e1e; 
+            background: #fffdfa; 
             padding: 25px; 
-            border-radius: 24px; 
+            border-radius: 4px; 
             max-width: 500px; 
             margin: auto; 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            border: 1px solid #333;
+            box-shadow: 10px 10px 0px #d7ccc8;
+            border: 2px solid #d7ccc8;
         }
-        h1 { color: #ff4081; font-size: 28px; margin-bottom: 5px; letter-spacing: -1px; }
-        .subtitulo { color: #888; font-weight: 500; margin-bottom: 25px; display: block; text-transform: uppercase; font-size: 12px; letter-spacing: 2px; }
+        h1 { color: #bf360c; font-size: 26px; margin-bottom: 5px; font-variant: small-caps; border-bottom: 2px solid #bf360c; display: inline-block; padding-bottom: 5px; }
+        .subtitulo { color: #8d6e63; font-weight: bold; margin-top: 10px; margin-bottom: 25px; display: block; font-style: italic; }
 
-        /* Recuadro de Premios Neon */
+        /* Recuadro de Premios Estilo Antiguo */
         .info-box { 
-            background: #252525; 
-            border-radius: 16px; 
+            background: #efebe9; 
+            border: 1px solid #d7ccc8; 
             padding: 20px; 
             margin-bottom: 25px; 
             text-align: left; 
-            border-left: 4px solid #ff4081;
+            position: relative;
         }
-        .info-box h2 { color: #ff4081; font-size: 18px; margin-top: 0; text-transform: uppercase; }
-        .premio-item { margin: 12px 0; font-size: 15px; border-bottom: 1px solid #333; padding-bottom: 8px; }
+        .info-box h2 { color: #5d4037; font-size: 20px; margin-top: 0; text-align: center; border-bottom: 1px dashed #a1887f; padding-bottom: 10px; }
+        .premio-item { margin: 12px 0; font-size: 16px; border-bottom: 1px solid #d7ccc8; padding-bottom: 8px; }
+        
         .pago-info { 
-            background: #121212; 
-            border-radius: 12px; 
+            background: #fff3e0; 
+            border-radius: 0; 
             padding: 15px; 
             margin-top: 15px; 
-            border: 1px solid #444; 
+            border: 1px solid #ffcc80; 
             text-align: center;
         }
 
-        /* Botón Copiar Alias Moderno */
+        /* Botón Copiar Alias Rústico */
         .alias-click { 
-            color: #ff4081; 
+            color: #e65100; 
             font-weight: bold; 
             cursor: pointer; 
-            background: #2d2d2d; 
-            padding: 5px 12px; 
-            border-radius: 8px; 
+            background: #ffffff; 
+            padding: 6px 15px; 
+            border: 1px solid #ff9800;
             display: inline-block;
-            margin-top: 5px;
-            border: 1px solid #ff4081;
+            margin-top: 8px;
+            box-shadow: 3px 3px 0px #ffcc80;
         }
-        #copiado-aviso { font-size: 12px; color: #4caf50; display: none; margin-top: 5px; }
+        #copiado-aviso { font-size: 12px; color: #2e7d32; display: none; margin-top: 8px; font-weight: bold; }
 
-        /* Grilla de Números Dark */
-        .grilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); gap: 10px; margin: 25px 0; }
+        /* Grilla de Números Tradicional */
+        .grilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); gap: 8px; margin: 25px 0; }
         .nro { 
-            padding: 15px 5px; 
-            background: #2d2d2d; 
-            color: #ff4081;
-            border-radius: 12px; 
+            padding: 12px 5px; 
+            background: #d7ccc8; 
+            color: #5d4037;
+            border-radius: 0; 
             cursor: pointer; 
             font-weight: bold; 
-            transition: 0.3s; 
-            border: 1px solid #3d3d3d;
+            transition: 0.2s; 
+            border: 1px solid #a1887f;
         }
-        .nro:hover { border-color: #ff4081; transform: translateY(-3px); }
-        .nro.reservado { background: #1a1a1a; color: #444; cursor: not-allowed; text-decoration: line-through; border: none; }
+        .nro:hover { background: #bcaaa4; }
+        .nro.reservado { background: #cfd8dc; color: #90a4ae; cursor: not-allowed; text-decoration: line-through; border: 1px solid #b0bec5; opacity: 0.6; }
         .nro.seleccionado { 
-            background: #ff4081; 
+            background: #bf360c; 
             color: white; 
-            border-color: #ff4081; 
-            box-shadow: 0 0 20px rgba(255, 64, 129, 0.4); 
+            border-color: #870000; 
+            transform: rotate(-3deg) scale(1.1);
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.2);
         }
         
-        /* Formulario Flotante */
-        #form-reserva { 
-            display: none; 
-            margin-top: 25px; 
-            padding: 20px; 
-            background: #252525; 
-            border-radius: 20px; 
-            border: 1px solid #ff4081;
-            animation: slideUp 0.4s ease-out;
-        }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        
-        input { 
-            padding: 14px; 
-            width: 90%; 
-            margin-bottom: 15px; 
-            border-radius: 12px; 
-            border: 1px solid #444; 
-            background: #121212; 
-            color: white;
-            outline: none;
-        }
-        input:focus { border-color: #ff4081; }
-
-        /* Botón WhatsApp */
-        button { 
-            background: #25d366; 
-            color: white; 
-            border: none; 
-            padding: 16px; 
-            border-radius: 12px; 
-            cursor: pointer; 
-            font-weight: bold; 
-            width: 100%; 
-            font-size: 16px;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
-        }
-
-        .footer { margin-top: 40px; color: #666; font-size: 13px; line-height: 1.6; }
-        .fecha-sorteo { background: #333; color: #ff4081; padding: 6px 15px; border-radius: 20px; display: inline-block; margin: 15px 0; font-weight: bold; border: 1px solid #ff4081; }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <h1>🐰 RIFA DE PASCUAS</h1>
-    <span class="subtitulo">Viaje de Egresados 🎓</span>
-
-    <div class="info-box">
-        <h2>🎁 Premios</h2>
-        <div class="premio-item">🥇 <b>1er:</b> 1 Lechón cocinado en horno de barro</div>
-        <div class="premio-item">🥈 <b>2do:</b> 5 kg de asado</div>
-        <div class="premio-item">🥉 <b>3er:</b> Un clavo oxidado</div>
-        
-        <div class="pago-info">
-            <span style="display:block; margin-bottom:10px; font-weight:bold; color:#ff4081">🎟 VALOR: $5000</span>
-            <b>Alias:</b><br>
-            <div class="alias-click" onclick="copiarAlias('mieltresreinas.nx')">mieltresreinas.nx</div>
-            <div id="copiado-aviso">Copiado al portapapeles ✅</div>
-            <p style="font-size:11px; margin-top:10px; color:#888">Enviar comprobante al 2995304691</p>
-        </div>
-    </div>
-
-    <p style="font-weight:bold; font-size:14px">SELECCIONÁ TU NÚMERO:</p>
-    <div id="grilla" class="grilla">Conectando...</div>
-
-    <div id="form-reserva">
-        <h3>📍 NÚMERO <span id="nro-elegido" style="color:#ff4081"></span></h3>
-        <input type="text" id="nombre-cliente" placeholder="Nombre completo">
-        <input type="tel" id="tel-cliente" placeholder="WhatsApp (sin el +)">
-        <button id="btn-confirmar" onclick="enviarReserva()">RESERVAR Y ENVIAR COMPROBANTE</button>
-    </div>
-
-    <div class="footer">
-        <p>¡Gracias por ayudarnos a cumplir este sueño! ✨</p>
-        <div class="fecha-sorteo">📅 SORTEO: 31/03/2026 - 11:00 AM</div>
-        <p>Todo lo recaudado será destinado para nuestro viaje de egresados. 🎓</p>
-    </div>
-</div>
-
-<script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxp31A5qhqfKD4B7mtUc6Buo9thq30k6SESxbi4pRMrKTKU0QwOMTgS2vTX8xrlCnjY/exec';
-    const miWhatsApp = "5492995304691"; 
-    let numeroSeleccionado = null;
-
-    function copiarAlias(texto) {
-        navigator.clipboard.writeText(texto).then(() => {
-            const aviso = document.getElementById('copiado-aviso');
-            aviso.style.display = 'block';
-            setTimeout(() => { aviso.style.display = 'none'; }, 2000);
-        });
-    }
-
-    async function cargarNumeros() {
-        try {
-            const res = await fetch(scriptURL);
-            const data = await res.json();
-            const grilla = document.getElementById('grilla');
-            grilla.innerHTML = '';
-            for (let i = 1; i < data.length; i++) {
-                const nro = data[i][0];
-                const estado = data[i][2];
-                const div = document.createElement('div');
-                div.className = 'nro' + (estado === 'Reservado' ? ' reservado' : '');
-                div.innerText = nro;
-                if (estado !== 'Reservado') { div.onclick = () => abrirMenu(nro, div); }
-                grilla.appendChild(div);
-            }
-        } catch (e) { console.error("Error", e); }
-    }
-
-    function abrirMenu(nro, elemento) {
-        document.querySelectorAll('.nro').forEach(el => el.classList.remove('seleccionado'));
-        elemento.classList.add('seleccionado');
-        numeroSeleccionado = nro;
-        document.getElementById('nro-elegido').innerText = nro;
-        document.getElementById('form-reserva').style.display = 'block';
-        document.getElementById('form-reserva').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    async function enviarReserva() {
-        const nombre = document.getElementById('nombre-cliente').value;
-        const telefono = document.getElementById('tel-cliente').value;
-        if (!nombre || !telefono) return alert("Por favor, completa tus datos.");
-
-        const btn = document.getElementById('btn-confirmar');
-        btn.innerText = "⏳ GUARDANDO...";
-        btn.disabled = true;
-
-        const mensaje = encodeURIComponent(`¡Hola! Soy ${nombre}, reservé el N° ${numeroSeleccionado} para la Rifa. Adjunto el comprobante. ✨`);
-        const urlWhatsApp = `https://wa.me/${miWhatsApp}?text=${mensaje}`;
-
-        try {
-            await fetch(scriptURL, {
-                method: 'POST',
-                mode: 'no-cors',
-                body: JSON.stringify({ numero: numeroSeleccionado, nombre: nombre, telefono: telefono })
-            });
-            window.open(urlWhatsApp, '_blank');
-            alert("¡Número guardado! Enviá el comprobante ahora.");
-            location.reload();
-        } catch (e) {
-            alert("Error al guardar.");
-            btn.disabled = false;
-        }
-    }
-    cargarNumeros();
-</script>
-</body>
-</html>
+        /* Form

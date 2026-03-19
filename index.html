@@ -30,4 +30,207 @@
             background: #252525; 
             border-radius: 16px; 
             padding: 20px; 
-            margin-bottom
+            margin-bottom: 25px; 
+            text-align: left; 
+            border-left: 4px solid #ff4081;
+        }
+        .premio-item { margin: 10px 0; font-size: 15px; border-bottom: 1px solid #333; padding-bottom: 8px; }
+        
+        /* Pago y Alias */
+        .pago-info { 
+            background: #121212; 
+            border-radius: 12px; 
+            padding: 15px; 
+            margin-top: 15px; 
+            border: 1px solid #444; 
+            text-align: center;
+        }
+        .alias-click { 
+            color: #ff4081; 
+            font-weight: bold; 
+            cursor: pointer; 
+            background: #2d2d2d; 
+            padding: 8px 15px; 
+            border-radius: 8px; 
+            display: inline-block;
+            margin-top: 5px;
+            border: 1px solid #ff4081;
+            transition: 0.2s;
+        }
+        .alias-click:active { transform: scale(0.95); }
+        #copiado-aviso { font-size: 12px; color: #4caf50; display: none; margin-top: 8px; font-weight: bold; }
+
+        /* Grilla de Números */
+        .grilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); gap: 10px; margin: 25px 0; min-height: 100px; }
+        .nro { 
+            padding: 15px 5px; 
+            background: #2d2d2d; 
+            color: #ff4081;
+            border-radius: 12px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            transition: 0.3s; 
+            border: 1px solid #3d3d3d;
+            text-align: center;
+        }
+        .nro:hover { border-color: #ff4081; transform: translateY(-3px); }
+        .nro.reservado { background: #1a1a1a; color: #444; cursor: not-allowed; text-decoration: line-through; border: none; }
+        .nro.seleccionado { 
+            background: #ff4081; 
+            color: white; 
+            border-color: #ff4081; 
+            box-shadow: 0 0 20px rgba(255, 64, 129, 0.4); 
+        }
+        
+        /* Formulario */
+        #form-reserva { 
+            display: none; 
+            margin-top: 25px; 
+            padding: 20px; 
+            background: #252525; 
+            border-radius: 20px; 
+            border: 1px solid #ff4081;
+            animation: slideUp 0.4s ease-out;
+        }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        input { 
+            padding: 14px; 
+            width: 90%; 
+            margin-bottom: 15px; 
+            border-radius: 12px; 
+            border: 1px solid #444; 
+            background: #121212; 
+            color: white;
+            outline: none;
+            font-size: 16px;
+        }
+
+        /* Botón WhatsApp */
+        button { 
+            background: #25d366; 
+            color: white; 
+            border: none; 
+            padding: 16px; 
+            border-radius: 12px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            width: 100%; 
+            font-size: 16px;
+        }
+
+        .footer { margin-top: 40px; color: #666; font-size: 13px; text-align: center; }
+        .fecha-sorteo { background: #333; color: #ff4081; padding: 6px 15px; border-radius: 20px; display: inline-block; margin: 15px 0; font-weight: bold; border: 1px solid #ff4081; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🐰 RIFA DE PASCUAS</h1>
+    <span class="subtitulo">VIAJE DE EGRESADOS 🎓</span>
+
+    <div class="info-box">
+        <h2 style="color:#ff4081; margin-top:0; font-size:18px;">🎁 PREMIOS</h2>
+        <div class="premio-item">🥇 <b>1er:</b> 1 Lechón en horno de barro</div>
+        <div class="premio-item">🥈 <b>2do:</b> 5 kg de asado</div>
+        <div class="premio-item">🥉 <b>3er:</b> Un clavo oxidado</div>
+        
+        <div class="pago-info">
+            <span style="display:block; margin-bottom:5px; font-weight:bold; color:#ff4081; font-size:18px;">🎟 VALOR: $5000</span>
+            <p style="margin:5px 0; font-size:13px; color:#aaa;">Tocá para copiar el alias:</p>
+            <div class="alias-click" onclick="copiarAlias('mieltresreinas.nx')">mieltresreinas.nx</div>
+            <div id="copiado-aviso">¡Copiado con éxito! ✅</div>
+        </div>
+    </div>
+
+    <p style="text-align:center; font-weight:bold; font-size:14px;">ELEGÍ TU NÚMERO:</p>
+    <div id="grilla" class="grilla">Cargando la suerte... ⏳</div>
+
+    <div id="form-reserva">
+        <h3 style="text-align:center;">📍 NÚMERO <span id="nro-elegido" style="color:#ff4081"></span></h3>
+        <input type="text" id="nombre-cliente" placeholder="Nombre completo">
+        <input type="tel" id="tel-cliente" placeholder="WhatsApp (Ej: 2995304691)">
+        <button id="btn-confirmar" onclick="enviarReserva()">RESERVAR Y MANDAR COMPROBANTE</button>
+    </div>
+
+    <div class="footer">
+        <div class="fecha-sorteo">📅 SORTEO: 31/03/2026 - 11:00 AM</div>
+        <p>Gracias por ayudarnos con nuestro viaje. 🎓✨</p>
+    </div>
+</div>
+
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxp31A5qhqfKD4B7mtUc6Buo9thq30k6SESxbi4pRMrKTKU0QwOMTgS2vTX8xrlCnjY/exec';
+    const miWhatsApp = "5492995304691"; 
+    let numeroSeleccionado = null;
+
+    function copiarAlias(texto) {
+        navigator.clipboard.writeText(texto).then(() => {
+            const aviso = document.getElementById('copiado-aviso');
+            aviso.style.display = 'block';
+            setTimeout(() => { aviso.style.display = 'none'; }, 2000);
+        });
+    }
+
+    async function cargarNumeros() {
+        try {
+            const response = await fetch(scriptURL, { method: 'GET', cache: 'no-store' });
+            const data = await response.json();
+            const grilla = document.getElementById('grilla');
+            grilla.innerHTML = '';
+            
+            for (let i = 1; i < data.length; i++) {
+                const nro = data[i][0];
+                const estado = data[i][2];
+                const div = document.createElement('div');
+                div.className = 'nro' + (estado === 'Reservado' ? ' reservado' : '');
+                div.innerText = nro;
+                
+                if (estado !== 'Reservado') {
+                    div.onclick = () => {
+                        document.querySelectorAll('.nro').forEach(el => el.classList.remove('seleccionado'));
+                        div.classList.add('seleccionado');
+                        numeroSeleccionado = nro;
+                        document.getElementById('nro-elegido').innerText = nro;
+                        document.getElementById('form-reserva').style.display = 'block';
+                        document.getElementById('form-reserva').scrollIntoView({ behavior: 'smooth' });
+                    };
+                }
+                grilla.appendChild(div);
+            }
+        } catch (error) {
+            document.getElementById('grilla').innerText = "Error de conexión.";
+        }
+    }
+
+    async function enviarReserva() {
+        const nombre = document.getElementById('nombre-cliente').value;
+        const telefono = document.getElementById('tel-cliente').value;
+        if (!nombre || !telefono) return alert("Por favor, completa tus datos.");
+
+        const btn = document.getElementById('btn-confirmar');
+        btn.innerText = "PROCESANDO...";
+        btn.disabled = true;
+
+        const msj = encodeURIComponent(`¡Hola! Soy ${nombre}, reservé el N° ${numeroSeleccionado}. Adjunto el comprobante. ✨`);
+        const urlWa = `https://wa.me/${miWhatsApp}?text=${msj}`;
+
+        try {
+            await fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: JSON.stringify({ numero: numeroSeleccionado, nombre: nombre, telefono: telefono })
+            });
+            window.open(urlWa, '_blank');
+            alert("¡Número guardado! Enviá el comprobante ahora.");
+            location.reload();
+        } catch (e) {
+            alert("Error al guardar.");
+            btn.disabled = false;
+        }
+    }
+
+    window.onload = cargarNumeros;
+</script>
+</body>
+</html>

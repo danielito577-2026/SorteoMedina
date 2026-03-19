@@ -3,116 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡Rifa Egresados 2026! 🌴</title>
+    <title>Rifa de Pascuas - Dark Mode</title>
     <style>
+        /* ESTILO 1: MODERNO Y OSCURO */
         body { 
-            font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; 
-            background-color: #e0f7fa; 
-            color: #006064; 
+            font-family: 'Inter', -apple-system, sans-serif; 
+            background-color: #121212; 
+            color: #e0e0e0; 
             padding: 15px; 
             margin: 0;
         }
         .container { 
-            background: white; 
+            background: #1e1e1e; 
             padding: 25px; 
-            border-radius: 40px 15px 40px 15px; 
+            border-radius: 24px; 
             max-width: 500px; 
             margin: auto; 
-            box-shadow: 0 10px 0px #4dd0e1;
-            border: 4px solid #4dd0e1;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border: 1px solid #333;
         }
-        h1 { color: #ff1744; font-size: 28px; margin-bottom: 5px; text-shadow: 2px 2px #ffcc80; text-align: center; }
-        .subtitulo { color: #00bcd4; font-weight: bold; margin-bottom: 25px; display: block; font-size: 16px; text-align: center; }
+        h1 { color: #ff4081; font-size: 28px; margin-bottom: 5px; letter-spacing: -1px; }
+        .subtitulo { color: #888; font-weight: 500; margin-bottom: 25px; display: block; text-transform: uppercase; font-size: 12px; letter-spacing: 2px; }
 
+        /* Recuadro de Premios Neon */
         .info-box { 
-            background: #fff9c4; 
-            border-radius: 25px; 
+            background: #252525; 
+            border-radius: 16px; 
             padding: 20px; 
             margin-bottom: 25px; 
             text-align: left; 
-            border: 3px dashed #fdd835;
+            border-left: 4px solid #ff4081;
         }
+        .info-box h2 { color: #ff4081; font-size: 18px; margin-top: 0; text-transform: uppercase; }
+        .premio-item { margin: 12px 0; font-size: 15px; border-bottom: 1px solid #333; padding-bottom: 8px; }
         .pago-info { 
-            background: #ffffff; 
-            border-radius: 20px; 
+            background: #121212; 
+            border-radius: 12px; 
             padding: 15px; 
             margin-top: 15px; 
-            border: 3px solid #ff1744; 
+            border: 1px solid #444; 
             text-align: center;
         }
 
+        /* Botón Copiar Alias Moderno */
         .alias-click { 
-            color: #ffffff; 
+            color: #ff4081; 
             font-weight: bold; 
             cursor: pointer; 
-            background: #ff1744; 
-            padding: 8px 20px; 
-            border-radius: 50px;
+            background: #2d2d2d; 
+            padding: 5px 12px; 
+            border-radius: 8px; 
             display: inline-block;
-            margin-top: 10px;
-            box-shadow: 0 4px 0 #b71c1c;
+            margin-top: 5px;
+            border: 1px solid #ff4081;
         }
-        #copiado-aviso { font-size: 14px; color: #43a047; display: none; margin-top: 8px; font-weight: bold; }
+        #copiado-aviso { font-size: 12px; color: #4caf50; display: none; margin-top: 5px; }
 
-        .grilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(48px, 1fr)); gap: 12px; margin: 25px 0; min-height: 100px; }
+        /* Grilla de Números Dark */
+        .grilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); gap: 10px; margin: 25px 0; }
         .nro { 
-            width: 48px; height: 48px;
-            display: flex; align-items: center; justify-content: center;
-            background: #b2ebf2; color: #006064;
-            border-radius: 50%; cursor: pointer; font-weight: bold; 
-            transition: 0.3s; box-shadow: 0 4px 0 #4dd0e1;
+            padding: 15px 5px; 
+            background: #2d2d2d; 
+            color: #ff4081;
+            border-radius: 12px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            transition: 0.3s; 
+            border: 1px solid #3d3d3d;
         }
-        .nro.reservado { background: #eeeeee; color: #bdbdbd; cursor: not-allowed; text-decoration: line-through; box-shadow: none; }
+        .nro:hover { border-color: #ff4081; transform: translateY(-3px); }
+        .nro.reservado { background: #1a1a1a; color: #444; cursor: not-allowed; text-decoration: line-through; border: none; }
         .nro.seleccionado { 
-            background: #ffeb3b; color: #333; 
-            transform: scale(1.1) rotate(-5deg);
-            border: 2px solid #000;
-            box-shadow: 4px 4px 0 #fbc02d;
+            background: #ff4081; 
+            color: white; 
+            border-color: #ff4081; 
+            box-shadow: 0 0 20px rgba(255, 64, 129, 0.4); 
         }
         
+        /* Formulario Flotante */
         #form-reserva { 
-            display: none; margin-top: 25px; padding: 20px; 
-            background: #f1f8e9; border-radius: 30px; border: 4px solid #8bc34a;
+            display: none; 
+            margin-top: 25px; 
+            padding: 20px; 
+            background: #252525; 
+            border-radius: 20px; 
+            border: 1px solid #ff4081;
+            animation: slideUp 0.4s ease-out;
         }
-        input { padding: 12px; width: 85%; margin-bottom: 15px; border: 2px solid #8bc34a; border-radius: 15px; font-size: 16px; }
-        button { background: #00c853; color: white; border: none; padding: 15px; border-radius: 20px; cursor: pointer; font-weight: bold; width: 100%; font-size: 18px; box-shadow: 0 6px 0 #1b5e20; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        input { 
+            padding: 14px; 
+            width: 90%; 
+            margin-bottom: 15px; 
+            border-radius: 12px; 
+            border: 1px solid #444; 
+            background: #121212; 
+            color: white;
+            outline: none;
+        }
+        input:focus { border-color: #ff4081; }
 
-        .footer { margin-top: 40px; color: #00838f; font-size: 14px; text-align: center; }
-        .fecha-sorteo { background: #00bcd4; color: white; padding: 10px 25px; border-radius: 50px; display: inline-block; margin: 15px 0; }
+        /* Botón WhatsApp */
+        button { 
+            background: #25d366; 
+            color: white; 
+            border: none; 
+            padding: 16px; 
+            border-radius: 12px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            width: 100%; 
+            font-size: 16px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
+        }
+
+        .footer { margin-top: 40px; color: #666; font-size: 13px; line-height: 1.6; }
+        .fecha-sorteo { background: #333; color: #ff4081; padding: 6px 15px; border-radius: 20px; display: inline-block; margin: 15px 0; font-weight: bold; border: 1px solid #ff4081; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>🌴 RIFA EGRESADOS 🌴</h1>
-    <span class="subtitulo">¡Ayudanos a viajar! ✈️☀️</span>
+    <h1>🐰 RIFA DE PASCUAS</h1>
+    <span class="subtitulo">Viaje de Egresados 🎓</span>
 
     <div class="info-box">
-        <h2 style="text-align:center; color:#f57f17; margin-top:0;">🔥 Premios</h2>
-        <div>🥇 1er: Lechón al horno de barro 🍖</div>
-        <div>🥈 2do: 5 kg de asado 🥩</div>
-        <div>🥉 3er: Un clavo oxidado 🔨</div>
+        <h2>🎁 Premios</h2>
+        <div class="premio-item">🥇 <b>1er:</b> 1 Lechón cocinado en horno de barro</div>
+        <div class="premio-item">🥈 <b>2do:</b> 5 kg de asado</div>
+        <div class="premio-item">🥉 <b>3er:</b> Un clavo oxidado</div>
         
         <div class="pago-info">
-            <span style="font-weight:bold; color:#ff1744; font-size:20px;">🎟 PRECIO: $5000</span><br>
+            <span style="display:block; margin-bottom:10px; font-weight:bold; color:#ff4081">🎟 VALOR: $5000</span>
+            <b>Alias:</b><br>
             <div class="alias-click" onclick="copiarAlias('mieltresreinas.nx')">mieltresreinas.nx</div>
-            <div id="copiado-aviso">¡Copiado! 📋✨</div>
+            <div id="copiado-aviso">Copiado al portapapeles ✅</div>
+            <p style="font-size:11px; margin-top:10px; color:#888">Enviar comprobante al 2995304691</p>
         </div>
     </div>
 
-    <p style="text-align:center;"><b>✨ ELEGÍ TU NÚMERO:</b></p>
-    <div id="grilla" class="grilla">Cargando números... ⏳</div>
+    <p style="font-weight:bold; font-size:14px">SELECCIONÁ TU NÚMERO:</p>
+    <div id="grilla" class="grilla">Conectando...</div>
 
     <div id="form-reserva">
-        <h3 style="text-align:center;">🎉 NÚMERO <span id="nro-elegido" style="color:#ff1744"></span> 🎉</h3>
-        <input type="text" id="nombre-cliente" placeholder="¿Tu nombre?">
-        <input type="tel" id="tel-cliente" placeholder="Tu WhatsApp">
-        <button id="btn-confirmar" onclick="enviarReserva()">¡RESERVAR YA! 🚀</button>
+        <h3>📍 NÚMERO <span id="nro-elegido" style="color:#ff4081"></span></h3>
+        <input type="text" id="nombre-cliente" placeholder="Nombre completo">
+        <input type="tel" id="tel-cliente" placeholder="WhatsApp (sin el +)">
+        <button id="btn-confirmar" onclick="enviarReserva()">RESERVAR Y ENVIAR COMPROBANTE</button>
     </div>
 
     <div class="footer">
-        <div class="fecha-sorteo">📅 SORTEO: 31/03/2026 - 11hs</div>
-        <p>Todo lo recaudado es para nuestro viaje de egresados. 🎓<br><b>¡Suerte para todos! 🍀</b></p>
+        <p>¡Gracias por ayudarnos a cumplir este sueño! ✨</p>
+        <div class="fecha-sorteo">📅 SORTEO: 31/03/2026 - 11:00 AM</div>
+        <p>Todo lo recaudado será destinado para nuestro viaje de egresados. 🎓</p>
     </div>
 </div>
 
@@ -131,69 +175,54 @@
 
     async function cargarNumeros() {
         try {
-            // Usamos un método de 'cache: no-store' para forzar la carga limpia
-            const response = await fetch(scriptURL, { method: 'GET', cache: 'no-store' });
-            if (!response.ok) throw new Error('Error en red');
-            const data = await response.json();
-            
+            const res = await fetch(scriptURL);
+            const data = await res.json();
             const grilla = document.getElementById('grilla');
             grilla.innerHTML = '';
-            
-            // Empezamos desde i=1 para saltar el encabezado del Excel
             for (let i = 1; i < data.length; i++) {
                 const nro = data[i][0];
                 const estado = data[i][2];
                 const div = document.createElement('div');
                 div.className = 'nro' + (estado === 'Reservado' ? ' reservado' : '');
                 div.innerText = nro;
-                
-                if (estado !== 'Reservado') {
-                    div.onclick = () => {
-                        document.querySelectorAll('.nro').forEach(el => el.classList.remove('seleccionado'));
-                        div.classList.add('seleccionado');
-                        numeroSeleccionado = nro;
-                        document.getElementById('nro-elegido').innerText = nro;
-                        document.getElementById('form-reserva').style.display = 'block';
-                        document.getElementById('form-reserva').scrollIntoView({ behavior: 'smooth' });
-                    };
-                }
+                if (estado !== 'Reservado') { div.onclick = () => abrirMenu(nro, div); }
                 grilla.appendChild(div);
             }
-        } catch (error) {
-            console.error(error);
-            document.getElementById('grilla').innerHTML = "<p style='grid-column: 1/-1; color:red;'>Error al conectar. Por favor, refrescá la página o verificá tu conexión.</p>";
-        }
+        } catch (e) { console.error("Error", e); }
+    }
+
+    function abrirMenu(nro, elemento) {
+        document.querySelectorAll('.nro').forEach(el => el.classList.remove('seleccionado'));
+        elemento.classList.add('seleccionado');
+        numeroSeleccionado = nro;
+        document.getElementById('nro-elegido').innerText = nro;
+        document.getElementById('form-reserva').style.display = 'block';
+        document.getElementById('form-reserva').scrollIntoView({ behavior: 'smooth' });
     }
 
     async function enviarReserva() {
         const nombre = document.getElementById('nombre-cliente').value;
         const telefono = document.getElementById('tel-cliente').value;
-        if (!nombre || !telefono) return alert("Completá tus datos.");
+        if (!nombre || !telefono) return alert("Por favor, completa tus datos.");
 
         const btn = document.getElementById('btn-confirmar');
-        btn.innerText = "RESERVANDO...";
+        btn.innerText = "⏳ GUARDANDO...";
         btn.disabled = true;
 
-        const msj = encodeURIComponent(`¡Hola! Soy ${nombre}, reservé el N° ${numeroSeleccionado}. Adjunto comprobante. 🏖️`);
-        const urlWa = `https://wa.me/${miWhatsApp}?text=${msj}`;
+        const mensaje = encodeURIComponent(`¡Hola! Soy ${nombre}, reservé el N° ${numeroSeleccionado} para la Rifa. Adjunto el comprobante. ✨`);
+        const urlWhatsApp = `https://wa.me/${miWhatsApp}?text=${mensaje}`;
 
         try {
             await fetch(scriptURL, {
                 method: 'POST',
-                mode: 'no-cors', // Importante para Google Apps Script
+                mode: 'no-cors',
                 body: JSON.stringify({ numero: numeroSeleccionado, nombre: nombre, telefono: telefono })
             });
-            window.open(urlWa, '_blank');
-            alert("¡Número guardado!");
+            window.open(urlWhatsApp, '_blank');
+            alert("¡Número guardado! Enviá el comprobante ahora.");
             location.reload();
         } catch (e) {
             alert("Error al guardar.");
             btn.disabled = false;
         }
     }
-
-    // Iniciamos la carga
-    window.onload = cargarNumeros;
-</script>
-</body>
-</html>

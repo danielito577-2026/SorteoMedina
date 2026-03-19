@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gran Rifa Criolla - Egresados</title>
+    <style>
+        /* ESTILO 2: RÚSTICO Y TRADICIONAL */
+        body { 
+            font-family: 'Georgia', serif; 
+            background-color: #f4ece4; 
+            color: #5d4037; 
+            padding: 15px; 
+            margin: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/sepia-paper.png');
+        }
+        .container { 
+            background: #fffdfa; 
+            padding: 25px; 
+            border-radius: 4px; 
+            max-width: 500px; 
+            margin: auto; 
+            box-shadow: 10px 10px 0px #d7ccc8;
+            border: 2px solid #d7ccc8;
+        }
+        h1 { color: #bf360c; font-size: 26px; margin-bottom: 5px; font-variant: small-caps; border-bottom: 2px solid #bf360c; display: inline-block; padding-bottom: 5px; }
+        .subtitulo { color: #8d6e63; font-weight: bold; margin-top: 10px; margin-bottom: 25px; display: block; font-style: italic; }
+
+        /* Recuadro de Premios Estilo Antiguo */
+        .info-box { 
+            background: #efebe9; 
+            border: 1px solid #d7ccc8; 
+            padding: 20px; 
+            margin-bottom: 25px; 
+            text-align: left; 
+            position: relative;
+        }
+        .info-box h2 { color: #5d4037; font-size: 20px; margin-top: 0; text-align: center; border-bottom: 1px dashed #a1887f; padding-bottom: 10px; }
+        .premio-item { margin: 12px 0; font-size: 16px; border-bottom: 1px solid #d7ccc8; padding-bottom: 8px; }
+        
+        .pago-info { 
+            background: #fff3e0; 
+            border-radius: 0; 
+            padding: 15px; 
+            margin-top: 15px; 
+            border: 1px solid #ffcc80; 
+            text-align: center;
+        }
+
+        /* Botón Copiar Alias Rústico */
+        .alias-click { 
+            color: #e65100; 
+            font-weight: bold; 
+            cursor: pointer; 
+            background: #ffffff; 
+            padding: 6px 15px; 
+            border: 1px solid #ff9800;
+            display: inline-block;
+            margin-top: 8px;
+            box-shadow: 3px 3px 0px #ffcc80;
+        }
+        #copiado-aviso { font-size: 12px; color: #2e7d32; display: none; margin-top: 8px; font-weight: bold; }
+
+        /* Grilla de Números Tradicional */
+        .grilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); gap: 8px; margin: 25px 0; }
+        .nro { 
+            padding: 12px 5px; 
+            background: #d7ccc8; 
+            color: #5d4037;
+            border-radius: 0; 
+            cursor: pointer; 
+            font-weight: bold; 
+            transition: 0.2s; 
+            border: 1px solid #a1887f;
+        }
+        .nro:hover { background: #bcaaa4; }
+        .nro.reservado { background: #cfd8dc; color: #90a4ae; cursor: not-allowed; text-decoration: line-through; border: 1px solid #b0bec5; opacity: 0.6; }
+        .nro.seleccionado { 
+            background: #bf360c; 
+            color: white; 
+            border-color: #870000; 
+            transform: rotate(-3deg) scale(1.1);
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.2);
+        }
+        
+        /* Formulario de Reserva */
+        #form-reserva { 
+            display: none; 
+            margin-top: 25px; 
+            padding: 20px; 
+            background: #efebe9; 
+            border: 2px solid #bf360c;
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        input { 
+            padding: 12px; 
+            width: 85%; 
+            margin-bottom: 15px; 
+            border: 1px solid #a1887f; 
+            background: white; 
+            color: #5d4037;
+            outline: none;
+        }
+
+        /* Botón WhatsApp Criollo */
+        button { 
+            background: #2e7d32; 
+            color: white; 
+            border: none; 
+            padding: 15px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            width: 100%; 
+            font-size: 16px;
+            text-transform: uppercase;
+            box-shadow: 4px 4px 0px #1b5e20;
+        }
+        button:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px #1b5e20; }
+
+        .footer { margin-top: 40px; color: #8d6e63; font-size: 14px; line-height: 1.6; border-top: 1px double #d7ccc8; padding-top: 20px; }
+        .fecha-sorteo { background: #bf360c; color: white; padding: 8px 20px; display: inline-block; margin: 15px 0; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🍗 GRAN RIFA CRIOLLA 🍷</h1>
+    <span class="subtitulo">¡Ayudanos con nuestro Viaje de Egresados! 🎓</span>
+
+    <div class="info-box">
+        <h2>🎁 Premios de Campo</h2>
+        <div class="premio-item">🥇 <b>1er:</b> 1 Lechón cocinado en horno de barro</div>
+        <div class="premio-item">🥈 <b>2do:</b> 5 kg de asado de ternera</div>
+        <div class="premio-item">🥉 <b>3er:</b> Un clavo oxidado (¡de colección!)</div>
+        
+        <div class="pago-info">
+            <span style="display:block; margin-bottom:10px; font-weight:bold; color:#bf360c; font-size:18px;">🎟 VALOR: $5000</span>
+            <b>Alias para transferir:</b><br>
+            <div class="alias-click" onclick="copiarAlias('mieltresreinas.nx')">mieltresreinas.nx</div>
+            <div id="copiado-aviso">¡Copiado con éxito! ✅</div>
+            <p style="font-size:12px; margin-top:10px; color:#5d4037">Enviar comprobante al <b>2995304691</b></p>
+        </div>
+    </div>
+
+    <p style="font-weight:bold; text-transform:uppercase; font-size:13px;">Elegí tu número de la suerte:</p>
+    <div id="grilla" class="grilla">Cargando base de datos...</div>
+
+    <div id="form-reserva">
+        <h3>📍 RESERVAR NÚMERO <span id="nro-elegido" style="color:#bf360c"></span></h3>
+        <input type="text" id="nombre-cliente" placeholder="Nombre y Apellido">
+        <input type="tel" id="tel-cliente" placeholder="WhatsApp (Ej: 2991234567)">
+        <button id="btn-confirmar" onclick="enviarReserva()">CONFIRMAR Y MANDAR COMPROBANTE</button>
+    </div>
+
+    <div class="footer">
+        <p>¡Gracias por darnos una mano!<br>Suerte para todos 🍀</p>
+        <div class="fecha-sorteo">📅 SORTEO: 31/03/2026 - 11:00 AM</div>
+        <p>Todo lo recaudado será destinado para nuestro viaje de egresados. 🎓</p>
+    </div>
+</div>
+
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxp31A5qhqfKD4B7mtUc6Buo9thq30k6SESxbi4pRMrKTKU0QwOMTgS2vTX8xrlCnjY/exec';
+    const miWhatsApp = "5492995304691"; 
+    let numeroSeleccionado = null;
+
+    function copiarAlias(texto) {
+        navigator.clipboard.writeText(texto).then(() => {
+            const aviso = document.getElementById('copiado-aviso');
+            aviso.style.display = 'block';
+            setTimeout(() => { aviso.style.display = 'none'; }, 2000);
+        });
+    }
+
+    async function cargarNumeros() {
+        try {
+            const res = await fetch(scriptURL);
+            const data = await res.json();
+            const grilla = document.getElementById('grilla');
+            grilla.innerHTML = '';
+            for (let i = 1; i < data.length; i++) {
+                const nro = data[i][0];
+                const estado = data[i][2];
+                const div = document.createElement('div');
+                div.className = 'nro' + (estado === 'Reservado' ? ' reservado' : '');
+                div.innerText = nro;
+                if (estado !== 'Reservado') { div.onclick = () => abrirMenu(nro, div); }
+                grilla.appendChild(div);
+            }
+        } catch (e) { console.error("Error", e); }
+    }
+
+    function abrirMenu(nro, elemento) {
+        document.querySelectorAll('.nro').forEach(el => el.classList.remove('seleccionado'));
+        elemento.classList.add('seleccionado');
+        numeroSeleccionado = nro;
+        document.getElementById('nro-elegido').innerText = nro;
+        document.getElementById('form-reserva').style.display = 'block';
+        document.getElementById('form-reserva').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    async function enviarReserva() {
+        const nombre = document.getElementById('nombre-cliente').value;
+        const telefono = document.getElementById('tel-cliente').value;
+        if (!nombre || !telefono) return alert("Por favor, poné tu nombre y teléfono.");
+
+        const btn = document.getElementById('btn-confirmar');
+        btn.innerText = "PROCESANDO...";
+        btn.disabled = true;
+
+        const mensaje = encodeURIComponent(`¡Hola! Soy ${nombre}, acabo de reservar el N° ${numeroSeleccionado} para la Rifa del Lechón. 🍖 Adjunto el comprobante de pago. ✨`);
+        const urlWhatsApp = `https://wa.me/${miWhatsApp}?text=${mensaje}`;
+
+        try {
+            await fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: JSON.stringify({ numero: numeroSeleccionado, nombre: nombre, telefono: telefono })
+            });
+            window.open(urlWhatsApp, '_blank');
+            alert("¡Reserva anotada! Enviá el comprobante al WhatsApp que se va a abrir.");
+            location.reload();
+        } catch (e) {
+            alert("Error al guardar.");
+            btn.disabled = false;
+        }
+    }
+    cargarNumeros();
+</script>
+</body>
+</html>

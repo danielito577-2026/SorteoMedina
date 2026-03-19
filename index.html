@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¡Rifa Egresados 2026! 🌴</title>
     <style>
-        /* ESTILO 3: PLAYERO Y DIVERTIDO */
+        /* ESTILO 3: PLAYERO Y DIVERTIDO - CORREGIDO */
         body { 
             font-family: 'Comic Sans MS', 'Chalkboard SE', 'Inter', sans-serif; 
             background-color: #e0f7fa; 
@@ -19,13 +19,12 @@
             border-radius: 40px 15px 40px 15px; 
             max-width: 500px; 
             margin: auto; 
-            box-shadow: 0 15px 0px #4dd0e1;
+            box-shadow: 0 10px 0px #4dd0e1;
             border: 4px solid #4dd0e1;
         }
-        h1 { color: #ff1744; font-size: 30px; margin-bottom: 5px; text-shadow: 2px 2px #ffcc80; }
-        .subtitulo { color: #00bcd4; font-weight: bold; margin-bottom: 25px; display: block; font-size: 18px; }
+        h1 { color: #ff1744; font-size: 28px; margin-bottom: 5px; text-shadow: 2px 2px #ffcc80; }
+        .subtitulo { color: #00bcd4; font-weight: bold; margin-bottom: 25px; display: block; font-size: 16px; }
 
-        /* Recuadro de Premios Divertido */
         .info-box { 
             background: #fff9c4; 
             border-radius: 25px; 
@@ -34,9 +33,6 @@
             text-align: left; 
             border: 3px dashed #fdd835;
         }
-        .info-box h2 { color: #f57f17; font-size: 22px; margin-top: 0; text-align: center; }
-        .premio-item { margin: 12px 0; font-size: 16px; font-weight: bold; }
-        
         .pago-info { 
             background: #ffffff; 
             border-radius: 20px; 
@@ -46,7 +42,6 @@
             text-align: center;
         }
 
-        /* Botón Copiar Alias Pop */
         .alias-click { 
             color: #ffffff; 
             font-weight: bold; 
@@ -56,78 +51,35 @@
             border-radius: 50px;
             display: inline-block;
             margin-top: 10px;
-            transition: 0.3s;
             box-shadow: 0 4px 0 #b71c1c;
         }
-        .alias-click:active { transform: translateY(3px); box-shadow: 0 1px 0 #b71c1c; }
         #copiado-aviso { font-size: 14px; color: #43a047; display: none; margin-top: 8px; font-weight: bold; }
 
-        /* Grilla de Números estilo Burbuja */
         .grilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(48px, 1fr)); gap: 12px; margin: 25px 0; }
         .nro { 
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #b2ebf2; 
-            color: #006064;
-            border-radius: 50%; 
-            cursor: pointer; 
-            font-weight: bold; 
-            transition: 0.3s; 
-            border: none;
-            box-shadow: 0 4px 0 #4dd0e1;
+            width: 48px; height: 48px;
+            display: flex; align-items: center; justify-content: center;
+            background: #b2ebf2; color: #006064;
+            border-radius: 50%; cursor: pointer; font-weight: bold; 
+            transition: 0.3s; box-shadow: 0 4px 0 #4dd0e1;
         }
-        .nro:hover { transform: scale(1.1) rotate(5deg); background: #80deea; }
-        .nro.reservado { background: #eeeeee; color: #bdbdbd; cursor: not-allowed; text-decoration: line-through; box-shadow: none; transform: none; }
+        .nro.reservado { background: #eeeeee; color: #bdbdbd; cursor: not-allowed; text-decoration: line-through; box-shadow: none; }
         .nro.seleccionado { 
-            background: #ffeb3b; 
-            color: #333; 
-            transform: scale(1.2) rotate(-10deg);
+            background: #ffeb3b; color: #333; 
+            transform: scale(1.1) rotate(-5deg);
             border: 2px solid #000;
             box-shadow: 4px 4px 0 #fbc02d;
         }
         
-        /* Formulario Tropical */
         #form-reserva { 
-            display: none; 
-            margin-top: 25px; 
-            padding: 20px; 
-            background: #f1f8e9; 
-            border-radius: 30px;
-            border: 4px solid #8bc34a;
-            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: none; margin-top: 25px; padding: 20px; 
+            background: #f1f8e9; border-radius: 30px; border: 4px solid #8bc34a;
         }
-        @keyframes popIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        
-        input { 
-            padding: 12px; 
-            width: 85%; 
-            margin-bottom: 15px; 
-            border: 2px solid #8bc34a; 
-            border-radius: 15px;
-            outline: none;
-            font-size: 16px;
-        }
+        input { padding: 12px; width: 85%; margin-bottom: 15px; border: 2px solid #8bc34a; border-radius: 15px; font-size: 16px; }
+        button { background: #00c853; color: white; border: none; padding: 15px; border-radius: 20px; cursor: pointer; font-weight: bold; width: 100%; font-size: 18px; box-shadow: 0 6px 0 #1b5e20; }
 
-        /* Botón WhatsApp Fiesta */
-        button { 
-            background: #00c853; 
-            color: white; 
-            border: none; 
-            padding: 15px; 
-            border-radius: 20px;
-            cursor: pointer; 
-            font-weight: bold; 
-            width: 100%; 
-            font-size: 18px;
-            box-shadow: 0 6px 0 #1b5e20;
-        }
-        button:active { transform: translateY(3px); box-shadow: 0 2px 0 #1b5e20; }
-
-        .footer { margin-top: 40px; color: #00838f; font-weight: bold; }
-        .fecha-sorteo { background: #00bcd4; color: white; padding: 10px 25px; border-radius: 50px; display: inline-block; margin: 15px 0; transform: rotate(-2deg); }
+        .footer { margin-top: 40px; color: #00838f; font-size: 14px; }
+        .fecha-sorteo { background: #00bcd4; color: white; padding: 10px 25px; border-radius: 50px; display: inline-block; margin: 15px 0; }
     </style>
 </head>
 <body>
@@ -137,37 +89,36 @@
     <span class="subtitulo">¡Ayudanos a viajar! ✈️☀️</span>
 
     <div class="info-box">
-        <h2>🔥 ¡Premios Increíbles!</h2>
-        <div class="premio-item">🥇 1er: 1 Lechón al horno de barro 🍖</div>
-        <div class="premio-item">🥈 2do: 5 kg de asado de ternera 🥩</div>
-        <div class="premio-item">🥉 3er: Un clavo oxidado (¡limitado!) 🔨</div>
+        <h2 style="text-align:center; color:#f57f17;">🔥 Premios</h2>
+        <div>🥇 1er: Lechón al horno de barro 🍖</div>
+        <div>🥈 2do: 5 kg de asado 🥩</div>
+        <div>🥉 3er: Un clavo oxidado 🔨</div>
         
         <div class="pago-info">
-            <span style="display:block; margin-bottom:5px; font-weight:bold; color:#ff1744; font-size:20px;">🎟 PRECIO: $5000</span>
-            <p style="margin:5px 0;">Tocá para copiar el alias:</p>
+            <span style="font-weight:bold; color:#ff1744; font-size:20px;">🎟 PRECIO: $5000</span><br>
             <div class="alias-click" onclick="copiarAlias('mieltresreinas.nx')">mieltresreinas.nx</div>
             <div id="copiado-aviso">¡Copiado! 📋✨</div>
         </div>
     </div>
 
-    <p style="font-weight:bold;">✨ ¡ELEGÍ TU NÚMERO Y GANÁ! ✨</p>
-    <div id="grilla" class="grilla">Cargando la suerte...</div>
+    <p><b>✨ ELEGÍ TU NÚMERO:</b></p>
+    <div id="grilla" class="grilla">Cargando números... ⏳</div>
 
     <div id="form-reserva">
-        <h3>🎉 ¡ELEGISTE EL N° <span id="nro-elegido" style="color:#ff1744"></span>! 🎉</h3>
-        <input type="text" id="nombre-cliente" placeholder="¿Cómo te llamás?">
+        <h3>🎉 NÚMERO <span id="nro-elegido" style="color:#ff1744"></span> 🎉</h3>
+        <input type="text" id="nombre-cliente" placeholder="¿Tu nombre?">
         <input type="tel" id="tel-cliente" placeholder="Tu WhatsApp">
         <button id="btn-confirmar" onclick="enviarReserva()">¡RESERVAR YA! 🚀</button>
     </div>
 
     <div class="footer">
-        <p>¡Gracias por bancarnos en este sueño! 🎓✨</p>
         <div class="fecha-sorteo">📅 SORTEO: 31/03/2026 - 11hs</div>
-        <p>¡Mucha suerte para todos! 🍀🥥</p>
+        <p>Todo lo recaudado es para nuestro viaje de egresados. 🎓<br><b>¡Suerte para todos! 🍀</b></p>
     </div>
 </div>
 
 <script>
+    // URL VERIFICADA
     const scriptURL = 'https://script.google.com/macros/s/AKfycbxp31A5qhqfKD4B7mtUc6Buo9thq30k6SESxbi4pRMrKTKU0QwOMTgS2vTX8xrlCnjY/exec';
     const miWhatsApp = "5492995304691"; 
     let numeroSeleccionado = null;
@@ -182,8 +133,27 @@
 
     async function cargarNumeros() {
         try {
-            const res = await fetch(scriptURL);
-            const data = await res.json();
+            const response = await fetch(scriptURL);
+            const data = await response.json();
             const grilla = document.getElementById('grilla');
             grilla.innerHTML = '';
-            for (let i = 1; i
+            
+            for (let i = 1; i < data.length; i++) {
+                const nro = data[i][0];
+                const estado = data[i][2];
+                const div = document.createElement('div');
+                div.className = 'nro' + (estado === 'Reservado' ? ' reservado' : '');
+                div.innerText = nro;
+                if (estado !== 'Reservado') {
+                    div.onclick = () => {
+                        document.querySelectorAll('.nro').forEach(el => el.classList.remove('seleccionado'));
+                        div.classList.add('seleccionado');
+                        numeroSeleccionado = nro;
+                        document.getElementById('nro-elegido').innerText = nro;
+                        document.getElementById('form-reserva').style.display = 'block';
+                        document.getElementById('form-reserva').scrollIntoView({ behavior: 'smooth' });
+                    };
+                }
+                grilla.appendChild(div);
+            }
+        } catch (error) {

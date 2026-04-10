@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Viaje de Egresados - Theo Quiuan 🐳</title>
+    <title>Viaje de Egresados - Theo Quiuan 🐳🎓</title>
     <style>
         body { 
             font-family: 'Segoe UI', sans-serif; 
@@ -22,25 +22,40 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
-        /* Cabecera */
-        .header-theo { margin-bottom: 20px; }
-        .foto-theo {
-            width: 110px; height: 110px;
-            border-radius: 50%;
-            border: 4px solid #fff;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            object-fit: cover;
-            background: #f0f0f0;
-        }
-        h1 { color: #8d6e63; font-size: 24px; margin: 10px 0 5px; }
+        .header-theo { margin-bottom: 10px; }
+        h1 { color: #8d6e63; font-size: 24px; margin: 5px 0 2px; }
         .subtitulo-egresados { 
             color: #ff8a65; 
             font-weight: bold; 
             letter-spacing: 1px; 
-            font-size: 14px;
+            font-size: 13px;
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
+
+        /* COLLAGE CENTRAL - RUTA RAIZ */
+        .collage-container {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .foto-collage {
+            position: absolute;
+            border-radius: 12px;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            object-fit: cover;
+            background: #eee;
+        }
+        /* Ajuste de posiciones y nombres según tu GitHub */
+        .foto1 { width: 130px; height: 130px; transform: rotate(-8deg) translateX(-60px); z-index: 1; }
+        .foto2 { width: 120px; height: 160px; transform: rotate(5deg) translateY(-10px); z-index: 3; }
+        .foto3 { width: 110px; height: 150px; transform: rotate(-5deg) translateX(70px) translateY(10px); z-index: 2; }
 
         .historia { 
             background: #fff8e1; 
@@ -52,49 +67,17 @@
             border: 1px dashed #ffcc80;
         }
 
-        /* Sección de Premios */
-        .premios-box {
-            background: #fdf3e7;
-            border-radius: 20px;
-            padding: 15px;
-            margin: 20px 0;
-            border: 1px solid #ffccbc;
-            text-align: left;
-        }
-        .premio-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
-            font-size: 15px;
-        }
-        .premio-nro {
-            background: #ff8a65;
-            color: white;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 12px;
-            margin-right: 10px;
-            flex-shrink: 0;
-        }
+        .premios-box { background: #fdf3e7; border-radius: 20px; padding: 15px; margin: 20px 0; border: 1px solid #ffccbc; text-align: left; }
+        .premio-item { display: flex; align-items: center; margin-bottom: 8px; font-size: 15px; }
+        .premio-nro { background: #ff8a65; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; margin-right: 10px; }
 
-        /* Barra de Progreso */
         .meta-container { margin: 25px 0; text-align: left; }
         .meta-label { font-size: 12px; font-weight: bold; margin-bottom: 5px; display: flex; justify-content: space-between; }
         .progress-bar-bg { background: #eee; height: 18px; border-radius: 10px; overflow: hidden; border: 1px solid #ddd; }
         .progress-bar-fill { 
             background: linear-gradient(90deg, #4caf50, #8bc34a); 
-            height: 100%; 
-            width: 0%; 
-            transition: width 1.5s ease-in-out;
+            height: 100%; width: 0%; transition: width 1.5s ease-in-out;
         }
-
-        .galeria { display: flex; gap: 10px; margin: 20px 0; overflow-x: auto; padding: 10px 5px; }
-        .galeria img { width: 150px; height: 110px; border-radius: 12px; object-fit: cover; flex-shrink: 0; box-shadow: 0 3px 6px rgba(0,0,0,0.1); }
 
         .info-pago { background: #fbe9e7; border-radius: 20px; padding: 15px; margin-bottom: 20px; border: 1px solid #ffccbc; }
         .alias-click { color: #d84315; font-weight: bold; cursor: pointer; background: #fff; padding: 8px 15px; border-radius: 10px; border: 1px solid #ff8a65; display: inline-block; margin-top: 5px; }
@@ -121,51 +104,37 @@
 
 <div class="container">
     <div class="header-theo">
-        <img src="https://picsum.photos/id/1062/200/200" class="foto-theo" alt="Theo">
         <h1>¡Todos por Theo! 🐳</h1>
         <span class="subtitulo-egresados">🎓 MI VIAJE DE EGRESADOS</span>
     </div>
 
+    <div class="collage-container">
+        <img src="theo gato.jpeg" class="foto-collage foto1" alt="Theo con gato">
+        <img src="theo escuela 1.jpeg" class="foto-collage foto2" alt="Theo acto escolar">
+        <img src="theo escuela 2.jpeg" class="foto-collage foto3" alt="Theo bandera">
+    </div>
+
     <div class="historia">
         "¡Hola! Soy Theo Quiuan. Mi sueño es viajar a <b>Puerto Madryn</b> en octubre con mis compañeros para celebrar nuestro egreso. 
-        ¡Mi Familia me está ayudando con este sorteo! Gracias por sumarte." ✨
+        ¡Mi padrino es un Capo y me está ayudando con este sorteo! Gracias por sumarte." ✨
     </div>
 
     <div class="premios-box">
-        <h3 style="margin: 0 0 10px 0; color: #8d6e63; font-size: 18px; text-align: center;">🎁 PREMIOS DEL SORTEO</h3>
-        <div class="premio-item">
-            <div class="premio-nro">1°</div>
-            <span><b>Juego de Toallones</b> 🛀</span>
-        </div>
-        <div class="premio-item">
-            <div class="premio-nro">2°</div>
-            <span><b>Escurridor de Platos</b> 🍽️</span>
-        </div>
-        <div class="premio-item">
-            <div class="premio-nro">3°</div>
-            <span><b>Juego de Cortinas?</b> 🪟</span>
-        </div>
+        <h3 style="margin: 0 0 10px 0; color: #8d6e63; font-size: 18px; text-align: center;">🎁 PREMIOS</h3>
+        <div class="premio-item"><div class="premio-nro">1°</div><span><b>Juego de Toallones</b> 🛀</span></div>
+        <div class="premio-item"><div class="premio-nro">2°</div><span><b>Escurridor de Platos</b> 🍽️</span></div>
+        <div class="premio-item"><div class="premio-nro">3°</div><span><b>Juego de Cortinas?</b> 🪟</span></div>
     </div>
 
     <div class="meta-container">
-        <div class="meta-label">
-            <span>META: $500.000</span>
-            <span id="porcentaje-texto">Calculando...</span>
-        </div>
-        <div class="progress-bar-bg">
-            <div id="barra-progreso" class="progress-bar-fill"></div>
-        </div>
-    </div>
-
-    <div class="galeria">
-        <img src="https://images.pexels.com/photos/4666750/pexels-photo-4666750.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Ballena">
-        <img src="https://images.pexels.com/photos/1000653/pexels-photo-1000653.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Madryn">
-        <img src="https://images.pexels.com/photos/86405/penguin-funny-blue-water-86405.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Pingüinos">
+        <div class="meta-label"><span>META: $500.000</span><span id="porcentaje-texto">Calculando...</span></div>
+        <div class="progress-bar-bg"><div id="barra-progreso" class="progress-bar-fill"></div></div>
     </div>
 
     <div class="info-pago">
-        <h3 style="margin:0; color:#d84315;">🎟 VALOR DEL NÚMERO: $3000</h3>
-        <div class="alias-click" onclick="copiarAlias('mieltresreinas.nx')">mieltresreinas.nx</div>
+        <h3 style="margin:0; color:#d84315;">🎟 VALOR NÚMERO: $5000</h3>
+        <p style="font-size: 12px; color: #666; margin-bottom: 2px;">Alias a nombre de: <b>Silvia Cruz</b></p>
+        <div class="alias-click" onclick="copiarAlias('TheoB.0108')">TheoB.0108</div>
         <div id="copiado-aviso">¡Alias copiado! ✅</div>
     </div>
 
@@ -176,7 +145,7 @@
         <h3 style="margin-top:0; color:#e64a19;">📍 Reservando el N° <span id="nro-elegido"></span></h3>
         <input type="text" id="nombre-cliente" placeholder="Nombre completo">
         <input type="tel" id="tel-cliente" placeholder="Tu WhatsApp">
-        <button onclick="enviarReserva()">✅ CONFIRMAR Y ENVIAR COMPROBANTE</button>
+        <button onclick="enviarReserva()">✅ CONFIRMAR RESERVA</button>
     </div>
 
     <div class="footer">
@@ -203,19 +172,15 @@
             const response = await fetch(`${scriptURL}?v=${new Date().getTime()}`);
             const data = await response.json();
             grilla.innerHTML = '';
-            
             let totalNumeros = data.length - 1;
             let reservados = 0;
-
             for (let i = 1; i < data.length; i++) {
                 const nro = data[i][0];
                 const estado = data[i][2];
                 if (estado === 'Reservado') reservados++;
-
                 const div = document.createElement('div');
                 div.className = 'nro' + (estado === 'Reservado' ? ' reservado' : '');
                 div.innerText = nro;
-                
                 if (estado !== 'Reservado') {
                     div.onclick = function() {
                         document.querySelectorAll('.nro').forEach(el => el.classList.remove('seleccionado'));
@@ -228,11 +193,9 @@
                 }
                 grilla.appendChild(div);
             }
-
             let porcentaje = Math.round((reservados / totalNumeros) * 100);
             document.getElementById('barra-progreso').style.width = porcentaje + "%";
             document.getElementById('porcentaje-texto').innerText = porcentaje + "% COMPLETADO";
-
         } catch (e) {
             grilla.innerHTML = "Error al conectar con el sorteo.";
         }
@@ -242,21 +205,14 @@
         const nombre = document.getElementById('nombre-cliente').value;
         const telefono = document.getElementById('tel-cliente').value;
         if (!nombre || !telefono) return alert("Por favor, completa los datos.");
-
-        const btn = document.querySelector("button");
+        const btn = document.querySelector("#form-reserva button");
         btn.innerText = "⏳ GUARDANDO...";
         btn.disabled = true;
-
         const msj = encodeURIComponent(`¡Hola! Soy ${nombre}, reservé el N° ${numeroSeleccionado} para el viaje de egresados de Theo. ✨`);
         const urlWa = `https://api.whatsapp.com/send?phone=${miWhatsApp}&text=${msj}`;
-
         try {
-            await fetch(scriptURL, {
-                method: 'POST',
-                mode: 'no-cors',
-                body: JSON.stringify({ numero: numeroSeleccionado, nombre: nombre, telefono: telefono })
-            });
-            alert("¡Reserva enviada! Te redirigimos a WhatsApp.");
+            await fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ numero: numeroSeleccionado, nombre: nombre, telefono: telefono }) });
+            alert("¡Número reservado! Ahora te redirigimos al WhatsApp.");
             window.location.href = urlWa;
         } catch (e) { 
             alert("Error al guardar."); 
@@ -264,7 +220,6 @@
             btn.disabled = false;
         }
     }
-
     window.onload = cargarNumeros;
 </script>
 </body>

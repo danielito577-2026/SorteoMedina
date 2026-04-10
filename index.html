@@ -119,4 +119,107 @@
     </div>
 
     <div class="premios-box">
-        <h3 style="margin: 0 0 10px 0; color:
+        <h3 style="margin: 0 0 10px 0; color: #8d6e63; font-size: 18px; text-align: center;">🎁 PREMIOS</h3>
+        <div class="premio-item"><div class="premio-nro">1°</div><span><b>Juego de Toallones</b> 🛀</span></div>
+        <div class="premio-item"><div class="premio-nro">2°</div><span><b>Escurridor de Platos</b> 🍽️</span></div>
+        <div class="premio-item"><div class="premio-nro">3°</div><span><b>Juego de Cortinas</b> 🪟</span></div>
+    </div>
+
+    <div class="meta-container">
+        <div class="meta-label"><span>META: $450.000</span><span id="porcentaje-texto">Calculando...</span></div>
+        <div class="progress-bar-bg"><div id="barra-progreso" class="progress-bar-fill"></div></div>
+    </div>
+
+    <div class="info-pago">
+        <h3 style="margin:0; color:#d84315;">🎟 VALOR NÚMERO: $3.000</h3>
+        <p style="font-size: 12px; color: #666; margin-bottom: 2px;">Alias a nombre de: <b>Silvia Cruz</b></p>
+        <div class="alias-click" onclick="copiarAlias('TheoB.0108')">TheoB.0108</div>
+        <div id="copiado-aviso">¡Alias copiado! ✅</div>
+    </div>
+
+    <p style="font-weight:bold; font-size:14px; margin-bottom: 10px;">ELEGÍ TU NÚMERO DE LA SUERTE:</p>
+    <div id="grilla" class="grilla">Cargando números...</div>
+
+    <div id="form-reserva">
+        <h3 style="margin-top:0; color:#e64a19;">📍 Reservando el N° <span id="nro-elegido"></span></h3>
+        <input type="text" id="nombre-cliente" placeholder="Nombre completo">
+        <input type="tel" id="tel-cliente" placeholder="Tu WhatsApp">
+        <button onclick="enviarReserva()">✅ CONFIRMAR Y ENVIAR COMPROBANTE</button>
+    </div>
+
+    <div class="footer">
+        <div class="fecha-sorteo">📅 SORTEO: 22/06/2026 - 22:00 HS</div>
+        <p>¡Gracias por ayudarnos a cumplir este sueño! 🎓✨</p>
+    </div>
+</div>
+
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxp31A5qhqfKD4B7mtUc6Buo9thq30k6SESxbi4pRMrKTKU0QwOMTgS2vTX8xrlCnjY/exec';
+    const miWhatsApp = "5492995245061";
+    let numeroSeleccionado = null;
+
+    function copiarAlias(texto) {
+        navigator.clipboard.writeText(texto);
+        const aviso = document.getElementById('copiado-aviso');
+        aviso.style.display = 'block';
+        setTimeout(() => { aviso.style.display = 'none'; }, 2000);
+    }
+
+    async function cargarNumeros() {
+        const grilla = document.getElementById('grilla');
+        try {
+            const response = await fetch(`${scriptURL}?v=${new Date().getTime()}`);
+            const data = await response.json();
+            grilla.innerHTML = '';
+            let totalNumeros = data.length - 1;
+            let reservados = 0;
+            for (let i = 1; i < data.length; i++) {
+                const nro = data[i][0];
+                const estado = data[i][2];
+                if (estado === 'Reservado') reservados++;
+                const div = document.createElement('div');
+                div.className = 'nro' + (estado === 'Reservado' ? ' reservado' : '');
+                div.innerText = nro;
+                if (estado !== 'Reservado') {
+                    div.onclick = function() {
+                        document.querySelectorAll('.nro').forEach(el => el.classList.remove('seleccionado'));
+                        div.classList.add('seleccionado');
+                        numeroSeleccionado = nro;
+                        document.getElementById('nro-elegido').innerText = nro;
+                        document.getElementById('form-reserva').style.display = 'block';
+                        document.getElementById('form-reserva').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    };
+                }
+                grilla.appendChild(div);
+            }
+            let porcentaje = Math.round((reservados / totalNumeros) * 100);
+            document.getElementById('barra-progreso').style.width = porcentaje + "%";
+            document.getElementById('porcentaje-texto').innerText = porcentaje + "% COMPLETADO";
+        } catch (e) {
+            grilla.innerHTML = "Error al conectar con el sorteo.";
+        }
+    }
+
+    async function enviarReserva() {
+        const nombre = document.getElementById('nombre-cliente').value;
+        const telefono = document.getElementById('tel-cliente').value;
+        if (!nombre || !telefono) return alert("Por favor, completa tus datos.");
+        const btn = document.querySelector("#form-reserva button");
+        btn.innerText = "⏳ GUARDANDO...";
+        btn.disabled = true;
+        const msj = encodeURIComponent(`¡Hola! Soy ${nombre}, reservé el N° ${numeroSeleccionado} por $3.000 para el viaje de egresados de Theo. 🐳✨`);
+        const urlWa = `https://api.whatsapp.com/send?phone=${miWhatsApp}&text=${msj}`;
+        try {
+            await fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ numero: numeroSeleccionado, nombre: nombre, telefono: telefono }) });
+            alert("¡Número reservado con éxito! Ahora te redirigimos al WhatsApp para que envíes el comprobante.");
+            window.location.href = urlWa;
+        } catch (e) { 
+            alert("Hubo un error al guardar. Intentá de nuevo."); 
+            btn.innerText = "✅ CONFIRMAR Y ENVIAR COMPROBANTE";
+            btn.disabled = false;
+        }
+    }
+    window.onload = cargarNumeros;
+</script>
+</body>
+</html>
